@@ -14,6 +14,8 @@ public final class MafiaPlugin extends JavaPlugin {
                                 hiyo
 
                                 test SONG
+
+                                        test random
     }
 
     @Override
