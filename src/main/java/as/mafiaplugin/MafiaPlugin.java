@@ -9,6 +9,8 @@ public final class MafiaPlugin extends JavaPlugin {
         // Plugin startup logic
                 sos789
                         aslkdfjlsdjaf
+
+                        zzzzzzzzzzzzzzzzzzz
     }
 
     @Override
