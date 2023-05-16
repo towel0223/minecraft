@@ -7,7 +7,7 @@ public final class MafiaPlugin extends JavaPlugin {
     @Override
     public void onEnable() {
         // Plugin startup logic
-                asdffgas
+                sos7898
     }
 
     @Override
