@@ -15,7 +15,9 @@ public final class MafiaPlugin extends JavaPlugin {
 
                                 test SONG
 
+                                        test 송우승
                                         test random
+
     }
 
     @Override
