@@ -1,0 +1,4 @@
+name: MafiaPlugin
+version: '${project.version}'
+main: as.mafiaplugin.MafiaPlugin
+api-version: 1.19
