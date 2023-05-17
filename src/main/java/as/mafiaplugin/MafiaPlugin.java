@@ -6,16 +6,15 @@ public final class MafiaPlugin extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        // Plugin startup logic
-                sos789
-                        aslkdfjlsdjaf
 
-                        zzzzzzzzzzzzzzzzzz
-                                hiyo``````
-    }
+ System.out.println("My first plugin has started!! hello!!");
+    }        // Plugin startup logic
+
 
     @Override
     public void onDisable() {
+        System.out.println("My first plugin has stopped!! bye!!");
+
         // Plugin shutdown logic
     }
 }
