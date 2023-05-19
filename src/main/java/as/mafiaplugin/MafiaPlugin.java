@@ -14,9 +14,15 @@ public final class MafiaPlugin extends JavaPlugin implements Listener {
     public void onEnable() {
         getServer().getPluginManager().registerEvents(this,this);
 
+ System.out.println("My first plugin has started!! hello!!");
+ getCommand("blockbreak").setExecutor(new Han());
+    }        // Plugin startup logic
+
+
         // Plugin startup logic
 
-    }
+
+}
     @Override
     public void onDisable() {
         // Plugin shutdown logic
