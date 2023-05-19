@@ -1,4 +1,8 @@
 package as.mafiaplugin;
 
-public class Park {
+import org.bukkit.plugin.java.JavaPlugin;
+
+public class Park extends JavaPlugin{
+
+
 }
