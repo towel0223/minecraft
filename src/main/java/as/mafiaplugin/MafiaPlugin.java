@@ -9,10 +9,8 @@ public final class MafiaPlugin extends JavaPlugin implements Listener {
     public void onEnable() {
         getServer().getPluginManager().registerEvents(this,this);
 
-        getCommand("ready").setExecutor(new Song());
-
- System.out.println("My first plugin has started!! hello!!");
- getCommand("blockbreak").setExecutor(new Han());
+        getCommand("ready").setExecutor(new Song()); //송우승
+        getCommand("blockbreak").setExecutor(new Han()); //한원탁
 
 
 
