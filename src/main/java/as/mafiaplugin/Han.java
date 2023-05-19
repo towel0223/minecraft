@@ -1,5 +1,6 @@
 package as.mafiaplugin;
 
+<<<<<<< HEAD
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -14,8 +15,8 @@ import org.bukkit.inventory.ItemStack;
 public class Han implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if(sender instanceof Player) {
-            Player player = (Player)sender;
+        if (sender instanceof Player) {
+            Player player = (Player) sender;
             player.sendMessage("커맨드 수행!");
             Location eyeLocation = player.getEyeLocation();
             Block targetBlock = player.getTargetBlock(null, 5);

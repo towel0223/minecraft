@@ -2,3 +2,12 @@ name: MafiaPlugin
 version: '${project.version}'
 main: as.mafiaplugin.MafiaPlugin
 api-version: 1.19
+commands:
+  reday:
+    description: 게임준비 명령어입니다.
+    usage: /test, /테스트, /ㅌㅅㅌ 중 하나를 치면 적용됩니다.
+    aliases: [테스트,ㅌㅅㅌ]
+  shotgun:
+    description: 전방에 산탄 화살을 발사합니다.
+    usage: /shotgun
+    aliases: [샷건]
