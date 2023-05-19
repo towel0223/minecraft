@@ -8,6 +8,7 @@ public final class MafiaPlugin extends JavaPlugin {
     public void onEnable() {
 
  System.out.println("My first plugin has started!! hello!!");
+ getCommand("blockbreak").setExecutor(new Han());
     }        // Plugin startup logic
 
 
