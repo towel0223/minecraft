@@ -2,3 +2,9 @@ name: MafiaPlugin
 version: '1.0-SNAPSHOT'
 main: as.mafiaplugin.MafiaPlugin
 api-version: 1.19
+
+commands:
+  blockbreak:
+    description: 커서 블럭 1개 파괴
+    usage: /ㅂㄹ, /블럭파괴, /bb 중 택 1 작동
+    aliases: [ㅂㄹ, 블럭파괴, bb]
