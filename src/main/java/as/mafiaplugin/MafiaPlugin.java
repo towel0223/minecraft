@@ -22,7 +22,7 @@ public final class MafiaPlugin extends JavaPlugin implements Listener {
         // Plugin startup logic
 
 
-    }
+}
     @Override
     public void onDisable() {
         // Plugin shutdown logic
