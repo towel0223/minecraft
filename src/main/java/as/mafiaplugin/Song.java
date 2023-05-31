@@ -10,11 +10,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class Song extends JavaPlugin implements CommandExecutor {
     private String[] preparedPlayers = new String[100]; // 최대 100명까지 저장 가능한 배열
 
-    @Override
-    public void onEnable() {
-        // 플러그인 활성화 시 실행되는 코드
-        getCommand("준비완료").setExecutor(this); // "준비완료" 커맨드의 실행을 이 클래스에서 처리하도록 등록
-    }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -25,7 +20,7 @@ public class Song extends JavaPlugin implements CommandExecutor {
 
         Player player = (Player) sender;
 
-        if (args.length == 1 && args[0].equalsIgnoreCase("준비완료")) {
+        if (args.length == 2 && args[0].equalsIgnoreCase("준비완료")) {
             player.sendMessage("당신의 이름: " + player.getName());
             player.sendMessage("준비 여부: " + isPlayerReady(player));
 
