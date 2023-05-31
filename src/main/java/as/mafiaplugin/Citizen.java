@@ -11,6 +11,7 @@ public class Citizen implements Listener {
     protected String job;
     Player player;
 
+
    Citizen(){
         job=ChatColor.YELLOW+"시민";
     }

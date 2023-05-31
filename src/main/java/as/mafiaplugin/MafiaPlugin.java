@@ -38,7 +38,6 @@ public final class MafiaPlugin extends JavaPlugin {
 
         @Override
     public void onDisable() {
-
         // Plugin shutdown logic
     }
     public boolean getParticipation(){

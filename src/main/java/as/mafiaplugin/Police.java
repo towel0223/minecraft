@@ -12,6 +12,14 @@ public class Police extends Citizen {
         super.job= ChatColor.BLUE+"경찰";
     }
 
+    if (People[i].eqauls(player.getName()))
+    {
+        if(player.getJob().equals("Mafia")){
+
+        }
+
+    }
+
 
 
 
