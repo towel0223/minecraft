@@ -1,5 +1,6 @@
-as\mafiaplugin\Han.class
+as\mafiaplugin\Police.class
+as\mafiaplugin\Mafia.class
 as\mafiaplugin\Park.class
-as\mafiaplugin\Song.class
-as\mafiaplugin\Kim.class
+as\mafiaplugin\Citizen.class
+as\mafiaplugin\Doctor.class
 as\mafiaplugin\MafiaPlugin.class

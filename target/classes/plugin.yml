@@ -2,3 +2,16 @@ name: MafiaPlugin
 version: '1.0-SNAPSHOT'
 main: as.mafiaplugin.MafiaPlugin
 api-version: 1.19
+commands:
+  ready:
+    description: 잘될까 과연?
+    usage: /ready
+    aliases: [레디]
+  han:
+    description: 테스트 명령어
+    usage: /han
+    executor: as.MafiaPlugin.Han
+  start:
+    description: 제발되라
+    usage: /start
+    aliases: [스타트]
