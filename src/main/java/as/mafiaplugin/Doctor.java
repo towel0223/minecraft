@@ -8,8 +8,9 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 public class Doctor extends Citizen {
-    Doctor() {
-        super.job = ChatColor.GRAY + "의사";
+    Doctor(MafiaPlugin plugin){
+        super(plugin);
+        super.job=ChatColor.GRAY+"의사";
     }
 
     @Override
@@ -20,8 +21,7 @@ public class Doctor extends Citizen {
                     String playerName = strings[0];
 
                     // 플레이어 객체 가져오기
-                    Player player = plugin.getPlayer(playerName);
-
+                    Player player = getPlayer(playerName);
                     // 플레이어가 존재하고 온라인인 경우
                     if (player != null && player.isOnline()) {
                         // 플레이어에게 데미지 면역 효과 부여
