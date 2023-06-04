@@ -15,17 +15,14 @@ import java.util.Collections;
 import java.util.List;
 
 public class Citizen implements Listener, CommandExecutor {
+    MafiaPlugin plugin;
 
-    Citizen(MafiaPlugin plugin) {
-        job = ChatColor.YELLOW + "시민";
-        this.plugin=plugin;
-    }
+
 
     protected String job;
     Player player;
     List<Player> players = new ArrayList<Player>();
     boolean mafiaTime=true;
-    MafiaPlugin plugin;
 
 
     Citizen(MafiaPlugin plugin) {

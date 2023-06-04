@@ -11,7 +11,6 @@ public class Police extends Citizen {
     public Police(MafiaPlugin plugin) {
         super(plugin);
         super.job = ChatColor.BLUE + "경찰";
-        this.park = park; // Park 클래스의 인스턴스를 전달받음
     }
     public void setPark(Park park) {
         this.park = park;
@@ -58,7 +57,7 @@ public class Police extends Citizen {
         String job = getJobOfPlayer(player);
 
         // 직업이 마피아인지 확인한다.
-        if (job.contains("마피아") && job != null) {
+        if (job.contains("마피아")  ) {
             return true; // 마피아인 경우 true 반환
         } else {
             return false; // 마피아가 아닌 경우 false 반환

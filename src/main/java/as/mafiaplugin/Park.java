@@ -11,6 +11,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.boss.BossBar;
 import org.bukkit.boss.BarColor;
+import org.bukkit.scheduler.BukkitTask;
 
 import java.util.Collections;
 import java.util.Random;
@@ -80,7 +81,7 @@ public class Park implements CommandExecutor {
                     for (Player player3 : plugin.People) {
                         bossBar.addPlayer(player3); //각자 플레이어에게 보스바 부여
                     }
-                    Bukkit.getScheduler().runTaskTimer(plugin, () -> { //1초(20)마다 반복 0초후에 시작
+                    BukkitTask task=Bukkit.getScheduler().runTaskTimer(plugin, () -> { //1초(20)마다 반복 0초후에 시작
                         double progress = bossBar.getProgress(); //시간 가져오기
                         bossBar.setProgress(progress - 0.01f);  //남은시간(-1초씩 빼기 총 100초)
                         if (Math.abs(bossBar.getProgress()) < 0.01f) { //0초되면 보스바가 사라짐
