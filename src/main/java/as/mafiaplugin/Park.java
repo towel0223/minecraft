@@ -16,11 +16,14 @@ import java.util.Collections;
 import java.util.Random;
 
 public class Park implements CommandExecutor {
-    int a;
     BossBar bossBar=Bukkit.createBossBar("남은 시간",BarColor.BLUE, BarStyle.SOLID); //남은시간
-    private final MafiaPlugin plugin;
+    final MafiaPlugin plugin;
+    private final Police police;
+    private Park park;
+
     public Park(MafiaPlugin plugin) {
         this.plugin = plugin;
+        this.police = new Police(plugin); // 수정
     }
 
 
@@ -56,13 +59,20 @@ public class Park implements CommandExecutor {
             if(command.getName().equalsIgnoreCase("start")){  //게임시작
                 if(plugin.getCount()>=1) {
                     Collections.shuffle(plugin.People);
-                    for(int i=0; i<plugin.People.size(); i++){
+                    for (int i = 0; i < plugin.People.size(); i++) {
                         plugin.job[i].setPlayer(plugin.People.get(i));
-                        plugin.job[0].setPlayerAdd(plugin.People.get(i));
-                        plugin.People.get(i).sendMessage(ChatColor.WHITE + "당신의 직업은 " + plugin.job[i].getJob() + ChatColor.WHITE + " 입니다!");}
+                        plugin.People.get(i).sendMessage(ChatColor.WHITE + "당신의 직업은 " + plugin.job[i].getJob() + ChatColor.WHITE + " 입니다!");
+                    }
+
+
+                    police.setPark(this);  // Police 클래스에 현재 Park 인스턴스를 전달[수정한 부분]
+                    plugin.getCommand("search").setExecutor(new Police(plugin));
+                    plugin.getCommand("protect").setExecutor(new Doctor(plugin));
+                    plugin.job[0].MafiaTeleport(plugin.job[0].getPlayer());
                     for (Player all : plugin.People) { //마피아게임 밤
                         all.sendTitle("마피아 게임", ChatColor.DARK_PURPLE + "밤", 20, 40, 20);
                     }
+
 
                     for (Player all : plugin.People) { //마피아게임 낮
                         all.sendTitle("마피아 게임", ChatColor.YELLOW + "낮", 20, 40, 20);
@@ -73,12 +83,10 @@ public class Park implements CommandExecutor {
                     Bukkit.getScheduler().runTaskTimer(plugin, () -> { //1초(20)마다 반복 0초후에 시작
                         double progress = bossBar.getProgress(); //시간 가져오기
                         bossBar.setProgress(progress - 0.01f);  //남은시간(-1초씩 빼기 총 100초)
-                        if(Math.abs(bossBar.getProgress())<0.01f){ //0초되면 보스바가 사라짐
+                        if (Math.abs(bossBar.getProgress()) < 0.01f) { //0초되면 보스바가 사라짐
                             bossBar.removeAll();
                         }
                     }, 0, 20);
-
-
                 }
 
                 return true;

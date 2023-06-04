@@ -19,3 +19,7 @@ commands:
     description: search
     usage: /search <playername>
     executor: [서치]
+  protect:
+    description: protect
+    usage: /protecy <playername>
+    executor: [프로텍트]
