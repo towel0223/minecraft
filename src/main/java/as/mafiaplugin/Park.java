@@ -64,9 +64,9 @@ public class Park implements CommandExecutor {
                             all.sendTitle("마피아 게임", ChatColor.DARK_PURPLE + "밤", 20, 40, 20);
                         }
 
-                        for (Player all : plugin.People) { //마피아게임 낮
-                            all.sendTitle("마피아 게임", ChatColor.YELLOW + "낮", 20, 40, 20); 
-                        }
+                    for (Player all : plugin.People) { //마피아게임 낮
+                        all.sendTitle("마피아 게임", ChatColor.YELLOW + "낮", 20, 40, 20);
+                    }
                     for (Player player3 : plugin.People) {
                         bossBar.addPlayer(player3); //각자 플레이어에게 보스바 부여
                     }
@@ -81,17 +81,17 @@ public class Park implements CommandExecutor {
 
                 }
 
-                    return true;
-                }
-                else{
-                    player.sendMessage(ChatColor.RED+"플레이어수가 부족해 게임을 시작할 수 없습니다.");
-                    return true;
-                }
+                return true;
             }
-
-        return false;
+            else{
+                player.sendMessage(ChatColor.RED+"플레이어수가 부족해 게임을 시작할 수 없습니다.");
+                return true;
+            }
         }
 
-
-
+        return false;
     }
+
+
+
+}

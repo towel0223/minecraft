@@ -35,6 +35,9 @@ public class Citizen implements Listener, CommandExecutor {
     public void setPlayerAdd(Player player) {
         players.add(player);
     }
+    public Player getPlayer() {
+        return player;
+    }
 
 
     @Override
