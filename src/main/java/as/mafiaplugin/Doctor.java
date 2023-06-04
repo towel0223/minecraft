@@ -7,7 +7,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 public class Doctor extends Citizen {
-    Doctor(){
+    Doctor(MafiaPlugin plugin){
+        super(plugin);
         super.job=ChatColor.GRAY+"의사";
     }
 
