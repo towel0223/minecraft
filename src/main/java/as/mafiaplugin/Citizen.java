@@ -64,11 +64,11 @@ public class Citizen implements Listener, CommandExecutor {
     {
         if(mafiaTime)
         {
-          mafiaTime=false;
+            mafiaTime=false;
         }
         else
         {
-          mafiaTime=true;
+            mafiaTime=true;
         }
     }
 

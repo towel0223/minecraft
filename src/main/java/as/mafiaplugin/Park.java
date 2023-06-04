@@ -17,9 +17,13 @@ import java.util.Random;
 
 public class Park implements CommandExecutor {
     BossBar bossBar=Bukkit.createBossBar("남은 시간",BarColor.BLUE, BarStyle.SOLID); //남은시간
-    private final MafiaPlugin plugin;
+    final MafiaPlugin plugin;
+    private final Police police;
+    private Park park;
+
     public Park(MafiaPlugin plugin) {
         this.plugin = plugin;
+        this.police = new Police(plugin); // 수정
     }
 
 
@@ -41,7 +45,7 @@ public class Park implements CommandExecutor {
                     plugin.setCount();
 
                     if(!plugin.getPlayerName().contains(player.getName()))
-                    player.sendMessage(ChatColor.AQUA + "게임 준비를 완료했습니다.");
+                        player.sendMessage(ChatColor.AQUA + "게임 준비를 완료했습니다.");
                     plugin.People.add(player);
                     for(Player player2 : plugin.People) {
                         player2.sendMessage(ChatColor.AQUA + "현재 게임 참가한 인원: " + plugin.getCount());
@@ -59,6 +63,9 @@ public class Park implements CommandExecutor {
                         plugin.job[i].setPlayer(plugin.People.get(i));
                         plugin.People.get(i).sendMessage(ChatColor.WHITE + "당신의 직업은 " + plugin.job[i].getJob() + ChatColor.WHITE + " 입니다!");
                     }
+
+
+                    police.setPark(this);  // Police 클래스에 현재 Park 인스턴스를 전달[수정한 부분]
                     plugin.getCommand("search").setExecutor(new Police(plugin));
                     plugin.getCommand("protect").setExecutor(new Doctor(plugin));
                     plugin.job[0].MafiaTeleport(plugin.job[0].getPlayer());
