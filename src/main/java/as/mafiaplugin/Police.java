@@ -12,6 +12,7 @@ public class Police extends Citizen {
         super(plugin);
         super.job = ChatColor.BLUE + "경찰";
 
+
     }
 
     public void setPark(Park park) {
