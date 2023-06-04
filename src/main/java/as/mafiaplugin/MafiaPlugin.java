@@ -56,7 +56,13 @@ public final class MafiaPlugin extends JavaPlugin {
         this.count++;
     }
 
-    public Police getPolice() {
-        return police;
+
+    public Player getAssignedPlayer(String playerName) {
+        for (int i = 0; i < job.length; i++) {
+            if (job[i].getPlayer() != null && job[i].getPlayer().getName().equalsIgnoreCase(playerName)) {
+                return job[i].getPlayer();
+            }
+        }
+        return null;
     }
 }

@@ -28,7 +28,7 @@ public class Police extends Citizen {
             }
 
             String targetPlayerName = args[0];
-            Player targetPlayer = player.getServer().getPlayer(targetPlayerName);
+            Player targetPlayer =getCitizenPlayer(targetPlayerName);
 
             if (targetPlayer == null) {
                 player.sendMessage(ChatColor.RED + "해당 플레이어를 찾을 수 없습니다.");
@@ -70,4 +70,5 @@ public class Police extends Citizen {
         }
         return null; // 직업을 찾지 못한 경우 null을 반환합니다.
     }
+
 }

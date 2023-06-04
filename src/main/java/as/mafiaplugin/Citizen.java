@@ -30,5 +30,8 @@ public class Citizen implements Listener {
     public Player getPlayer() {
         return player;
     }
+    public void setTargetPlayer(Player targetPlayer) {
+        this.targetPlayer = targetPlayer;
+    }
 
 }
