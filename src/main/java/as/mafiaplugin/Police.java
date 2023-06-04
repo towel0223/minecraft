@@ -28,7 +28,7 @@ public class Police extends Citizen {
             }
 
             String targetPlayerName = args[0];
-            Player targetPlayer = player.getServer().getPlayer(targetPlayerName);
+            Player targetPlayer = players.getPlayer(targetPlayerName);
 
             if (targetPlayer == null) {
                 player.sendMessage(ChatColor.RED + "해당 플레이어를 찾을 수 없습니다.");
@@ -48,12 +48,13 @@ public class Police extends Citizen {
         return false;
     }
 
+
     private boolean isMafia(Player player) {
         // 플레이어의 직업을 가져온다.
         String job = getJobOfPlayer(player);
 
         // 직업이 마피아인지 확인한다.
-        if (job.equalsIgnoreCase(ChatColor.RED + "마피아")) {
+        if (job.contains("마피아")) {
             return true; // 마피아인 경우 true 반환
         } else {
             return false; // 마피아가 아닌 경우 false 반환
