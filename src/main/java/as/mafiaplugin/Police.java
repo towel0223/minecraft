@@ -62,7 +62,7 @@ public class Police extends Citizen {
             // 플레이어의 직업을 확인하여 반환하는 로직을 구현합니다.
             String targetPlayerName = player.getName();
             for (int i = 0; i < park.plugin.job.length; i++) {
-                if (park.plugin.job[i] != null && park.plugin.job[i].getPlayer(targetPlayerName) == player) {
+                if (park.plugin.job[i] != null && park.plugin.getPlayer(targetPlayerName) == player) {
                     return park.plugin.job[i].getJob();
                 }
             }

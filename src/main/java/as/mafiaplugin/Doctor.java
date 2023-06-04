@@ -21,7 +21,7 @@ public class Doctor extends Citizen {
                     String playerName = strings[0];
 
                     // 플레이어 객체 가져오기
-                    Player player = getPlayer(playerName);
+                    Player player = plugin.getPlayer(playerName);
                     // 플레이어가 존재하고 온라인인 경우
                     if (player != null && player.isOnline()) {
                         // 대상 플레이어가 "마피아"인지 확인

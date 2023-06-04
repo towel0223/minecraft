@@ -16,9 +16,9 @@ public final class MafiaPlugin extends JavaPlugin {
     List<Player> People=new ArrayList<Player>();
     Citizen[] job;
 
-    private Police police;
 
 
+    boolean mafiaRun=true;
 
 
     @Override
