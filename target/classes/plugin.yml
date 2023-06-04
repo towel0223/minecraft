@@ -15,3 +15,11 @@ commands:
     description: 제발되라
     usage: /start
     aliases: [스타트]
+  search:
+    description: search
+    usage: /search <playername>
+    executor: [서치]
+  protect:
+    description: protect
+    usage: /protecy <playername>
+    executor: [프로텍트]

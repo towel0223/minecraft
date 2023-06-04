@@ -20,12 +20,12 @@ public class Doctor extends Citizen {
                     String playerName = strings[0];
 
                     // 플레이어 객체 가져오기
-                    Player player = getPlayer(playerName);
+                    Player player = plugin.getPlayer(playerName);
 
                     // 플레이어가 존재하고 온라인인 경우
                     if (player != null && player.isOnline()) {
                         // 대상 플레이어가 "마피아"인지 확인
-                        MafiaPlugin mafiaPlugin = getPlugin(MafiaPlugin.class);
+                        MafiaPlugin mafiaPlugin = Plugin(MafiaPlugin.class);
                         boolean isMafia = mafiaPlugin.isMafia(player);
 
                         // 플레이어에게 데미지 면역 효과 부여
@@ -35,7 +35,7 @@ public class Doctor extends Citizen {
 
                         // 대상 플레이어가 "마피아"인 경우
                         if (isMafia) {
-                            mafiaPlugin.setMafiaTime(false);
+                            mafiaPlugin.MafiaTime(false);
                             player.removePotionEffect(PotionEffectType.DAMAGE_RESISTANCE);
                         }
 
