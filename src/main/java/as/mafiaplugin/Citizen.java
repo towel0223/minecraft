@@ -15,7 +15,9 @@ import java.util.Collections;
 import java.util.List;
 
 public class Citizen implements Listener, CommandExecutor {
-    MafiaPlugin plugin;
+
+    private int jobNumber; // 직업 번호 저장 변수
+  
     Citizen(MafiaPlugin plugin)
     {
         this.plugin=plugin;
@@ -29,6 +31,10 @@ public class Citizen implements Listener, CommandExecutor {
 
 
 
+
+    public int getJobNumber() {
+        return jobNumber;
+    }
 
     public void setPlayer(Player player) {
         this.player = player;
