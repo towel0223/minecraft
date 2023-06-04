@@ -24,6 +24,7 @@ public class Park implements CommandExecutor {
     public Park(MafiaPlugin plugin) {
         this.plugin = plugin;
         this.police = new Police(plugin); // 수정
+        this.police.setPark(this); //추가함
     }
 
 
@@ -72,7 +73,7 @@ public class Park implements CommandExecutor {
                     for (Player all : plugin.People) { //마피아게임 밤
                         all.sendTitle("마피아 게임", ChatColor.DARK_PURPLE + "밤", 20, 40, 20);
                     }
-
+                    police.setPark(this); //추가함
 
                     for (Player all : plugin.People) { //마피아게임 낮
                         all.sendTitle("마피아 게임", ChatColor.YELLOW + "낮", 20, 40, 20);

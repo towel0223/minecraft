@@ -28,10 +28,7 @@ public class Citizen implements Listener, CommandExecutor {
     MafiaPlugin plugin;
 
 
-    Citizen(MafiaPlugin plugin) {
-        job = ChatColor.YELLOW + "시민";
-        this.plugin=plugin;
-    }
+
 
     public void setPlayer(Player player) {
         this.player = player;
