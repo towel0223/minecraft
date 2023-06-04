@@ -27,5 +27,8 @@ public class Citizen implements Listener {
         Player player = e.getPlayer();
 
     }
+    public Player getPlayer() {
+        return player;
+    }
 
 }
