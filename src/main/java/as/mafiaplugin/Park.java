@@ -14,7 +14,7 @@ import java.util.Collections;
 
 
 public class Park implements CommandExecutor {
-    BossBar bossBar=Bukkit.createBossBar("남은 시간",BarColor.BLUE, BarStyle.SOLID); //남은시간
+    BossBar bossBar = Bukkit.createBossBar("남은 시간", BarColor.BLUE, BarStyle.SOLID); //남은시간
     final MafiaPlugin plugin;
     private final Police police;
     private Park park;
@@ -39,14 +39,13 @@ public class Park implements CommandExecutor {
                 }
 
 
-
                 if (plugin.getCount() < 12) {
                     plugin.setCount();
 
-                    if(!plugin.getPlayerName().contains(player.getName()))
+                    if (!plugin.getPlayerName().contains(player.getName()))
                         player.sendMessage(ChatColor.AQUA + "게임 준비를 완료했습니다.");
                     plugin.People.add(player);
-                    for(Player player2 : plugin.People) {
+                    for (Player player2 : plugin.People) {
                         player2.sendMessage(ChatColor.AQUA + "현재 게임 참가한 인원: " + plugin.getCount());
                     }
                     return true;
@@ -54,13 +53,40 @@ public class Park implements CommandExecutor {
                 } else {
                     player.sendMessage(ChatColor.RED + "플레이어가 꽉차 게임을 할 수 없습니다!");
                     return true;
-                }}
-            if(command.getName().equalsIgnoreCase("start")){  //게임시작
-                if(plugin.getCount()>=1) {
+                }
+            }
+            if (command.getName().equalsIgnoreCase("start")) {  //게임시작
+                if (plugin.getCount() >= 1) {
                     Collections.shuffle(plugin.People);
+
+                    for (int i = 0; i < plugin.People.size(); i++) {
+                        plugin.job[i].setPlayer(plugin.People.get(i));
+                        plugin.job[0].setPlayerAdd(plugin.People.get(i));
+
+                        plugin.People.get(i).sendMessage(ChatColor.WHITE + "당신의 직업은 " + plugin.job[i].getJob() + ChatColor.WHITE + " 입니다!");
+                    }
+
+
+                    for (Player all : plugin.People) { //마피아게임 밤
+                        all.sendTitle("마피아 게임", ChatColor.DARK_RED + "밤", 20, 40, 20);
+                    }
+
+                    for (Player all : plugin.People) { //마피아게임 낮
+                        all.sendTitle("마피아 게임", ChatColor.YELLOW + "낮", 20, 40, 20);
+                    }
+
+
+                    for (Player all : plugin.People) { //마피아게임 낮
+                        all.sendTitle("마피아 게임", ChatColor.YELLOW + "낮", 20, 40, 20);
+                    }
+
+
+                    plugin.People.get(i).sendMessage(ChatColor.WHITE + "당신의 직업은 " + plugin.job[i].getJob() + ChatColor.WHITE + " 입니다!");
+
                     for (int i = 0; i < plugin.People.size(); i++) {
                         plugin.job[i].setPlayer(plugin.People.get(i));
                         plugin.People.get(i).sendMessage(ChatColor.WHITE + "당신의 직업은 " + plugin.job[i].getJob() + ChatColor.WHITE + " 입니다!");
+
                     }
 
 
@@ -84,8 +110,10 @@ public class Park implements CommandExecutor {
                     }
 
                     for (Player all : plugin.People) { //마피아게임 낮
+
                         all.sendTitle("마피아 게임", ChatColor.YELLOW + "낮", 20, 40, 20);
                     }
+
                     for (Player player3 : plugin.People) {
                         bossBar.addPlayer(player3); //각자 플레이어에게 보스바 부여
                     }
@@ -116,9 +144,7 @@ public class Park implements CommandExecutor {
             }
         }
 
-        return false;
+
+                
     }
-
-
-
 }
