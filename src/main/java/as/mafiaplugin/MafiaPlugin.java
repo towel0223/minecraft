@@ -50,9 +50,9 @@ public final class MafiaPlugin extends JavaPlugin {
 
     public List<String> getPlayerName(){
         List<String> name=new ArrayList<String>();
-        for(int i=0; i<People.size(); i++) {
+            for(int i=0; i<People.size(); i++) {
 
-            name.add(People.get(i).getName());
+                name.add(People.get(i).getName());
         }
         return name;
     }
