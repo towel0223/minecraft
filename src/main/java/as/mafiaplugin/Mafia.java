@@ -21,8 +21,11 @@ public class Mafia extends Citizen {
     public void mafiaTeleport(PlayerTeleportEvent e){
         Player player = e.getPlayer();
     if(mafiaTime){
-        PotionEffect effect = new PotionEffect(PotionEffectType.INVISIBILITY,999 , 0);
+        PotionEffect effect = new PotionEffect(PotionEffectType.INVISIBILITY,12000 , 1);
         player.addPotionEffect(effect);
+    }
+    else{
+        PotionEffect effect = new PotionEffect(PotionEffectType.INVISIBILITY, 20, 0);
     }
     }
 }

@@ -14,6 +14,7 @@ public final class MafiaPlugin extends JavaPlugin {
     List<Player> People=new ArrayList<Player>();
     Citizen[] job;
 
+    private Police police;
 
 
 
@@ -22,7 +23,7 @@ public final class MafiaPlugin extends JavaPlugin {
     public void onEnable() {
         job=new Citizen[4];
         job[0]=new Citizen();
-        job[1]=new Police();
+        job[1]=new Police(this);
         job[2]=new Mafia();
         job[3]=new Doctor();
         getServer().getPluginManager().registerEvents(job[0],this);
@@ -33,6 +34,7 @@ public final class MafiaPlugin extends JavaPlugin {
 
         getCommand("ready").setExecutor(ParkExecutor);
         getCommand("start").setExecutor(ParkExecutor);
+        getCommand("search").setExecutor(new Police(this));
     }
 
         @Override
@@ -47,6 +49,7 @@ public final class MafiaPlugin extends JavaPlugin {
     {
         this.count++;
     }
+
 
     public List<String> getPlayerName(){
         List<String> name=new ArrayList<String>();

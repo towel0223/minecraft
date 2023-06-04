@@ -61,9 +61,15 @@ public class Park implements CommandExecutor {
                     plugin.job[0].setPlayerAdd(plugin.People.get(i));
                     plugin.People.get(i).sendMessage(ChatColor.WHITE + "당신의 직업은 " + plugin.job[i].getJob() + ChatColor.WHITE + " 입니다!");}
 
+
                     for (Player all : plugin.People) { //마피아게임 밤
                         all.sendTitle("마피아 게임", ChatColor.DARK_RED + "밤", 20, 40, 20);
                     }
+
+                    for (Player all : plugin.People) { //마피아게임 낮
+                        all.sendTitle("마피아 게임", ChatColor.YELLOW + "낮", 20, 40, 20);
+                    }
+
 
                     for (Player all : plugin.People) { //마피아게임 낮
                         all.sendTitle("마피아 게임", ChatColor.YELLOW + "낮", 20, 40, 20);
@@ -84,17 +90,17 @@ public class Park implements CommandExecutor {
 
                 }
 
-                    return true;
-                }
-                else{
-                    player.sendMessage(ChatColor.RED+"플레이어수가 부족해 게임을 시작할 수 없습니다.");
-                    return true;
-                }
+                return true;
             }
-
-        return false;
+            else{
+                player.sendMessage(ChatColor.RED+"플레이어수가 부족해 게임을 시작할 수 없습니다.");
+                return true;
+            }
         }
 
-
-
+        return false;
     }
+
+
+
+}
