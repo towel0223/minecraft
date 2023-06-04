@@ -34,16 +34,18 @@ public class Citizen implements Listener {
     }
 
 
-    @EventHandler
-    public void ducking(PlayerDeathEvent e) {
-        List<String> name=new ArrayList<String>();
+    public class mafiaTime {
+        boolean mafiaTime;
+        public void setMafiaTimeMorning() {
+            mafiaTime = false;
 
-        for (Player qwer : players) {
-            name.add(qwer.getName());
-        }
-        for(Player asdf: players){
-            asdf.sendMessage(name.toString());
+
         }
 
+        public void setMafiaTimeNight() {
+            mafiaTime = true;
+
+
+        }
     }
 }
