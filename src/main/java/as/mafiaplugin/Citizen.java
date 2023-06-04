@@ -38,7 +38,16 @@ public class Citizen implements Listener, CommandExecutor {
     public Player getPlayer() {
         return player;
     }
-
+    public Player getPlayer(String name)
+    {
+        for(Player all: players){
+            if(all.getName().equalsIgnoreCase(name))
+            {
+                return all;
+            }
+        }
+        return null;
+    }
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {

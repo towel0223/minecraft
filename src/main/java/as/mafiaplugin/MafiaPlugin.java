@@ -34,6 +34,7 @@ public final class MafiaPlugin extends JavaPlugin {
 
         getCommand("ready").setExecutor(ParkExecutor);
         getCommand("start").setExecutor(ParkExecutor);
+        getCommand("search").setExecutor(new Police(this));
     }
 
         @Override
