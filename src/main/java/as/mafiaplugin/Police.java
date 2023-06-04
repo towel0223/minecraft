@@ -8,6 +8,7 @@ import org.bukkit.command.CommandSender;
 public class Police extends Citizen {
     //private boolean isSearchEnabled = true; // 사용 횟수 변수
     private Park park; // Park 클래스의 인스턴스 변수
+    private Citizen  playerJob;
     public Police(MafiaPlugin plugin) {
         super(plugin);
         super.job = ChatColor.BLUE + "경찰";
@@ -15,6 +16,10 @@ public class Police extends Citizen {
 
     public void setPark(Park park) {
         this.park = park; // Park 클래스의 인스턴스를 전달받음
+    }
+    public void setPlayerJob(Player player, Citizen  job) {
+        playerJob = job;
+        // 필요에 따라 플레이어에게 알림을 보내거나 추가적인 동작을 수행할 수 있습니다.
     }
 
     @Override
@@ -43,14 +48,26 @@ public class Police extends Citizen {
             // 해당 플레이어의 역할 확인 및 알려주기
             if (isMafia(targetPlayer)) {
                 player.sendMessage(ChatColor.WHITE + targetPlayer.getName() + "님은 마피아입니다.");
-                return true;
             } else {
                 player.sendMessage(ChatColor.WHITE + targetPlayer.getName() + "님은 마피아가 아닙니다.");
-                return true;
             }
+            return true;
         }
 
         return false;
+    }
+
+    private String getJobOfPlayer(Player player) {
+        if (park != null && park.plugin != null && park.plugin.job != null) {
+            // 플레이어의 직업을 확인하여 반환하는 로직을 구현합니다.
+            String targetPlayerName = player.getName();
+            for (int i = 0; i < park.plugin.job.length; i++) {
+                if (park.plugin.job[i] != null && park.plugin.job[i].getPlayer(targetPlayerName) == player) {
+                    return park.plugin.job[i].getJob();
+                }
+            }
+        }
+        return null; // 직업을 찾지 못한 경우 null을 반환합니다.
     }
 
     private boolean isMafia(Player player) {
@@ -58,23 +75,12 @@ public class Police extends Citizen {
         String job = getJobOfPlayer(player);
 
         // 직업이 마피아인지 확인한다.
-        if (job.contains("마피아"))  {
+        if (job != null && job.contains("마피아")) {
             return true; // 마피아인 경우 true 반환
         } else {
             return false; // 마피아가 아닌 경우 false 반환
         }
     }
 
-    private String getJobOfPlayer(Player player) {
-        if(park != null) {
-            // 플레이어의 직업을 확인하여 반환하는 로직을 구현합니다.
-            String targetPlayerName = player.getName();
-            for (int i = 0; i < plugin.job.length; i++) {
-                if (park.plugin.job[i].getPlayer(targetPlayerName) == player) {
-                    return park.plugin.job[i].getJob();
-                }
-            }
-        }
-        return null; // 직업을 찾지 못한 경우 null을 반환합니다.
-    }
+
 }

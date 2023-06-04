@@ -69,6 +69,17 @@ public class Park implements CommandExecutor {
 
 
                     police.setPark(this);  // Police 클래스에 현재 Park 인스턴스를 전달[수정한 부분]
+                    for (int i = 0; i < plugin.People.size(); i++) {
+                        Player targetPlayer = plugin.People.get(i);
+                        String playerName = targetPlayer.getName();
+                        for (int j = 0; j < plugin.job.length; j++) {
+                            if (plugin.job[j].getPlayer().getName().equals(playerName)) {
+                                police.setPlayerJob(targetPlayer, plugin.job[j]);
+                                break;
+                            }
+                        }
+                    }
+
                     plugin.getCommand("search").setExecutor(new Police(plugin));
                     plugin.getCommand("protect").setExecutor(new Doctor(plugin));
                     plugin.job[0].MafiaTeleport(plugin.job[0].getPlayer());
