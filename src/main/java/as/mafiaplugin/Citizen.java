@@ -51,7 +51,7 @@ public class Citizen implements Listener, CommandExecutor {
     public Player getPlayer(String name)
     {
         for(Player all: players){
-            if(all.getName().equalsIgnoreCase(name))
+            if(all.getName().equals(name))
             {
                 return all;
             }
@@ -106,6 +106,7 @@ public class Citizen implements Listener, CommandExecutor {
         }
         return null; // 직업을 찾지 못한 경우 null을 반환합니다.
     }
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player) {
@@ -126,16 +127,16 @@ public class Citizen implements Listener, CommandExecutor {
                     // 마피아 플레이어들을 텔레포트
                     for (Player mafiaPlayer : plugin.getJobOfPlayer("마피아")) {
                         // 마피아 플레이어의 원하는 좌표 설정
-                        Location mafiaLocation = new Location(player.getWorld(), x, y, z);
+                        Location mafiaLocation = new Location(player.getWorld(), 1, 2,3);
                         mafiaPlayer.teleport(mafiaLocation);
                     }
 
                     // 시민(시민과 같은 편) 플레이어들을 랜덤한 장소로 텔레포트
                     List<Location> citizenLocations = new ArrayList<>();
                     // 시민 플레이어를 텔레포트할 여러 장소의 좌표를 설정
-                    citizenLocations.add(new Location(player.getWorld(), x1, y1, z1));
-                    citizenLocations.add(new Location(player.getWorld(), x2, y2, z2));
-                    citizenLocations.add(new Location(player.getWorld(), x3, y3, z3));
+                    citizenLocations.add(new Location(player.getWorld(), 1, 1, 1));
+                    citizenLocations.add(new Location(player.getWorld(), 2, 2, 2));
+                    citizenLocations.add(new Location(player.getWorld(), 3, 3, 3));
                     // ... 다른 장소들 추가
 
                     for (Player citizenPlayer : plugin.getPlayersByJob("시민")) {
@@ -154,14 +155,14 @@ public class Citizen implements Listener, CommandExecutor {
                     if (playerJob != null) {
                         if (playerJob.equalsIgnoreCase("마피아")) {
                             // 마피아인 경우의 추가 동작 수행
-                            // ...
+
                         } else if (playerJob.equalsIgnoreCase("시민")) {
                             // 시민인 경우의 추가 동작 수행
-                            // ...
+
                         }
                     }
 
-                    // 나머지 코드 생략
+                     //코드 +
                 } else {
                     player.sendMessage(ChatColor.RED + "플레이어수가 부족해 게임을 시작할 수 없습니다.");
                 }

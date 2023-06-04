@@ -30,7 +30,7 @@ public class Police extends Citizen {
             String targetPlayerName = args[0];
 
 
-            Player targetPlayer=getPlayer(targetPlayerName);
+            Player targetPlayer=plugin.getPlayer(targetPlayerName);
             if (targetPlayer == null) {
                 player.sendMessage(ChatColor.RED + "해당 플레이어를 찾을 수 없습니다.");
                 return true;
