@@ -50,7 +50,7 @@ public class Mafia extends Citizen {
     public void MafiaMove(PlayerMoveEvent e){
         Player Mafiaplayer = e.getPlayer();
         // 플레이어가 취소 상태인지 확인
-        if (mafiaRun&&player.equals(Mafiaplayer)) {
+        if (mafiaRun&&player.getName().equals(Mafiaplayer.getName())) {
             e.setCancelled(true);
         }
         else{

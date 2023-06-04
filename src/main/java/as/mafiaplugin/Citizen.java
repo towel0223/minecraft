@@ -16,7 +16,10 @@ import java.util.List;
 
 public class Citizen implements Listener, CommandExecutor {
     MafiaPlugin plugin;
-
+    Citizen(MafiaPlugin plugin)
+    {
+        this.plugin=plugin;
+    }
 
 
     protected String job;
@@ -25,10 +28,7 @@ public class Citizen implements Listener, CommandExecutor {
     boolean mafiaTime=true;
 
 
-    Citizen(MafiaPlugin plugin) {
-        job = ChatColor.YELLOW + "시민";
-        this.plugin=plugin;
-    }
+
 
     public void setPlayer(Player player) {
         this.player = player;
