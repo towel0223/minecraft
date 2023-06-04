@@ -19,9 +19,11 @@ public class Citizen implements Listener, CommandExecutor {
     Player player;
     List<Player> players = new ArrayList<Player>();
     boolean mafiaTime=true;
+    MafiaPlugin plugin;
 
-    Citizen() {
+    Citizen(MafiaPlugin plugin) {
         job = ChatColor.YELLOW + "시민";
+        this.plugin=plugin;
     }
 
     public void setPlayer(Player player) {
@@ -52,5 +54,21 @@ public class Citizen implements Listener, CommandExecutor {
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         return false;
+    }
+
+    @EventHandler
+    public void Death(PlayerDeathEvent event)
+    {
+        if(mafiaTime)
+        {
+          mafiaTime=false;
+        }
+        else
+        {
+          mafiaTime=true;
+        }
+    }
+
+    public void MafiaTeleport(Player player) {
     }
 }
