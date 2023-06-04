@@ -16,10 +16,12 @@ import java.util.List;
 
 public class Citizen implements Listener, CommandExecutor {
 
+    private int jobNumber; // 직업 번호 저장 변수
     Citizen(MafiaPlugin plugin) {
         job = ChatColor.YELLOW + "시민";
         this.plugin=plugin;
     }
+
 
     protected String job;
     Player player;
@@ -29,6 +31,10 @@ public class Citizen implements Listener, CommandExecutor {
 
 
 
+
+    public int getJobNumber() {
+        return jobNumber;
+    }
 
     public void setPlayer(Player player) {
         this.player = player;
