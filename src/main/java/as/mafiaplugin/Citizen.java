@@ -17,6 +17,7 @@ import java.util.List;
 public class Citizen implements Listener, CommandExecutor {
 
     private int jobNumber; // 직업 번호 저장 변수
+    MafiaPlugin plugin;
   
     Citizen(MafiaPlugin plugin)
     {
