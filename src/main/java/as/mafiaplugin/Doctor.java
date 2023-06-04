@@ -4,17 +4,21 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 public class Doctor extends Citizen {
-    Doctor() {
-        super.job = ChatColor.GRAY + "의사";
+    Doctor(MafiaPlugin plugin){
+        super(plugin);
+        super.job=ChatColor.GRAY+"의사";
     }
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
-        if (mafiaTime) {
+      if (mafiaTime) {
             if (command.getName().equalsIgnoreCase("protect")) {
                 if (strings.length == 1) {
                     String playerName = strings[0];
