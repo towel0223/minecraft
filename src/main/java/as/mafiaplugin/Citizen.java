@@ -17,17 +17,17 @@ import java.util.List;
 public class Citizen implements Listener, CommandExecutor {
 
     private int jobNumber; // 직업 번호 저장 변수
-    Citizen(MafiaPlugin plugin) {
-        job = ChatColor.YELLOW + "시민";
+  
+    Citizen(MafiaPlugin plugin)
+    {
         this.plugin=plugin;
+        job=ChatColor.WHITE+"시민";
     }
 
 
     protected String job;
     Player player;
-    List<Player> players = new ArrayList<Player>();
     boolean mafiaTime=true;
-    MafiaPlugin plugin;
 
 
 
@@ -44,22 +44,11 @@ public class Citizen implements Listener, CommandExecutor {
         return job;
     }
 
-    public void setPlayerAdd(Player player) {
-        players.add(player);
-    }
+
     public Player getPlayer() {
         return player;
     }
-    public Player getPlayer(String name)
-    {
-        for(Player all: players){
-            if(all.getName().equals(name))
-            {
-                return all;
-            }
-        }
-        return null;
-    }
+
 
 
     @Override

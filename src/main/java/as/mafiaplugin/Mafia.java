@@ -13,6 +13,9 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Mafia extends Citizen {
     Mafia(MafiaPlugin plugin) {
 
@@ -21,6 +24,7 @@ public class Mafia extends Citizen {
     }
 
     Location mafiaLocation;
+
 
     //mafiaTime T:밤 F:낮
     @EventHandler
@@ -42,16 +46,18 @@ public class Mafia extends Citizen {
         }
     }
 
-//    @EventHandler
-//    public void MafiaMove(PlayerMoveEvent e) {
-//        e.setCancelled(true);
-//        new BukkitRunnable() {
-//            @Override
-//            public void run() {
-//                 e.setCancelled(false);
-//            }
-//        }.runTaskLater(plugin, 200L);
-//    }
+    @EventHandler
+    public void MafiaMove(PlayerMoveEvent e){
+        // 플레이어가 취소 상태인지 확인
+        if (plugin.mafiaRun) {
+           player.setWalkSpeed(0.0f);
+           player.sendMessage(ChatColor.RED+"10초 동안 움직일 수 없습니다.");
+        }
+        else{
+            player.setWalkSpeed(0.2f);
+        }
+
+    }
 
 
 }

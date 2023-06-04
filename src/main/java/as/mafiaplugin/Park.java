@@ -6,14 +6,12 @@ import org.bukkit.boss.BarStyle;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.PluginCommand;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitScheduler;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.boss.BossBar;
 import org.bukkit.boss.BarColor;
-
 import java.util.Collections;
-import java.util.Random;
+
 
 public class Park implements CommandExecutor {
     BossBar bossBar=Bukkit.createBossBar("남은 시간",BarColor.BLUE, BarStyle.SOLID); //남은시간
@@ -84,7 +82,6 @@ public class Park implements CommandExecutor {
                     for (Player all : plugin.People) { //마피아게임 밤
                         all.sendTitle("마피아 게임", ChatColor.DARK_PURPLE + "밤", 20, 40, 20);
                     }
-                    police.setPark(this); //추가함
 
                     for (Player all : plugin.People) { //마피아게임 낮
                         all.sendTitle("마피아 게임", ChatColor.YELLOW + "낮", 20, 40, 20);
@@ -92,15 +89,25 @@ public class Park implements CommandExecutor {
                     for (Player player3 : plugin.People) {
                         bossBar.addPlayer(player3); //각자 플레이어에게 보스바 부여
                     }
-                    Bukkit.getScheduler().runTaskTimer(plugin, () -> { //1초(20)마다 반복 0초후에 시작
+                    new BukkitRunnable(){
+                        @Override
+                        public void run(){
                         double progress = bossBar.getProgress(); //시간 가져오기
                         bossBar.setProgress(progress - 0.01f);  //남은시간(-1초씩 빼기 총 100초)
-                        if (Math.abs(bossBar.getProgress()) < 0.01f) { //0초되면 보스바가 사라짐
+                        if (Math.abs(bossBar.getProgress()) < 0.02f) { //0초되면 보스바가 사라짐
                             bossBar.removeAll();
-                        }
-                    }, 0, 20);
-                }
+                            cancel();
+                        }}
+                    }.runTaskTimerAsynchronously(plugin,0,20);
 
+                    new BukkitRunnable(){
+                        @Override
+                        public void run(){
+                                plugin.mafiaRun=false;
+                        }
+                    }.runTaskLaterAsynchronously(plugin,200);
+
+                }
                 return true;
             }
             else{
