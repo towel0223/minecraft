@@ -24,6 +24,7 @@ public class Park implements CommandExecutor {
     public Park(MafiaPlugin plugin) {
         this.plugin = plugin;
         this.police = new Police(plugin); // 수정
+        this.police.setPark(this); //추가함
     }
 
 
@@ -66,13 +67,24 @@ public class Park implements CommandExecutor {
 
 
                     police.setPark(this);  // Police 클래스에 현재 Park 인스턴스를 전달[수정한 부분]
+                    for (int i = 0; i < plugin.People.size(); i++) {
+                        Player targetPlayer = plugin.People.get(i);
+                        String playerName = targetPlayer.getName();
+                        for (int j = 0; j < plugin.job.length; j++) {
+                            if (plugin.job[j].getPlayer().getName().equals(playerName)) {
+                                police.setPlayerJob(targetPlayer, plugin.job[j]);
+                                break;
+                            }
+                        }
+                    }
+
                     plugin.getCommand("search").setExecutor(new Police(plugin));
                     plugin.getCommand("protect").setExecutor(new Doctor(plugin));
                     plugin.job[0].MafiaTeleport(plugin.job[0].getPlayer());
                     for (Player all : plugin.People) { //마피아게임 밤
                         all.sendTitle("마피아 게임", ChatColor.DARK_PURPLE + "밤", 20, 40, 20);
                     }
-
+                    police.setPark(this); //추가함
 
                     for (Player all : plugin.People) { //마피아게임 낮
                         all.sendTitle("마피아 게임", ChatColor.YELLOW + "낮", 20, 40, 20);
