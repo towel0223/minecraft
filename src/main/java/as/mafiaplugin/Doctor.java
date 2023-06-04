@@ -8,8 +8,9 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 public class Doctor extends Citizen {
-    Doctor() {
-        super.job = ChatColor.GRAY + "의사";
+    Doctor(MafiaPlugin plugin){
+        super(plugin);
+        super.job=ChatColor.GRAY+"의사";
     }
 
     @Override
