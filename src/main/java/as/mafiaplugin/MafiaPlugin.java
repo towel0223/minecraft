@@ -9,13 +9,12 @@ import java.util.*;
 public final class MafiaPlugin extends JavaPlugin {
 
     private Park ParkExecutor;
-    private boolean Participation=false;
+
     private int count=0;
     List<Player> People=new ArrayList<Player>();
     Citizen[] job;
 
     private Police police;
-
 
 
 
@@ -35,19 +34,14 @@ public final class MafiaPlugin extends JavaPlugin {
 
         getCommand("ready").setExecutor(ParkExecutor);
         getCommand("start").setExecutor(ParkExecutor);
+        getCommand("search").setExecutor(new Police(this));
     }
 
-        @Override
+    @Override
     public void onDisable() {
         // Plugin shutdown logic
     }
-    public boolean getParticipation(){
-        return Participation;
-    }
-    public void setParticipation(boolean Participation)
-    {
-        this.Participation=Participation;
-    }
+
     public int getCount(){
         return count;
     }
@@ -57,12 +51,12 @@ public final class MafiaPlugin extends JavaPlugin {
     }
 
 
-    public Player getAssignedPlayer(String playerName) {
-        for (int i = 0; i < job.length; i++) {
-            if (job[i].getPlayer() != null && job[i].getPlayer().getName().equalsIgnoreCase(playerName)) {
-                return job[i].getPlayer();
-            }
+    public List<String> getPlayerName(){
+        List<String> name=new ArrayList<String>();
+        for(int i=0; i<People.size(); i++) {
+
+            name.add(People.get(i).getName());
         }
-        return null;
+        return name;
     }
 }

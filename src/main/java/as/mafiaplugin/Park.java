@@ -6,14 +6,16 @@ import org.bukkit.boss.BarStyle;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.PluginCommand;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.boss.BossBar;
 import org.bukkit.boss.BarColor;
+
+import java.util.Collections;
 import java.util.Random;
 
 public class Park implements CommandExecutor {
-    Random rd = new Random();
     int a;
     BossBar bossBar=Bukkit.createBossBar("남은 시간",BarColor.BLUE, BarStyle.SOLID); //남은시간
     private final MafiaPlugin plugin;
@@ -29,7 +31,7 @@ public class Park implements CommandExecutor {
             Player player = (Player) sender;
             if (command.getName().equalsIgnoreCase("ready")) { //게임준비
 
-                if (plugin.getParticipation() == true) {
+                if (plugin.getPlayerName().contains(player.getName())) {
                     player.sendMessage(ChatColor.RED + "이미 게임에 참여하셨습니다.");
                     return true;
                 }
@@ -38,9 +40,10 @@ public class Park implements CommandExecutor {
 
                 if (plugin.getCount() < 12) {
                     plugin.setCount();
-                    plugin.setParticipation(true);
+
+                    if(!plugin.getPlayerName().contains(player.getName()))
+                        player.sendMessage(ChatColor.AQUA + "게임 준비를 완료했습니다.");
                     plugin.People.add(player);
-                    player.sendMessage(ChatColor.AQUA + "게임 준비를 완료했습니다.");
                     for(Player player2 : plugin.People) {
                         player2.sendMessage(ChatColor.AQUA + "현재 게임 참가한 인원: " + plugin.getCount());
                     }
@@ -49,14 +52,14 @@ public class Park implements CommandExecutor {
                 } else {
                     player.sendMessage(ChatColor.RED + "플레이어가 꽉차 게임을 할 수 없습니다!");
                     return true;
-                }
-
-            }
+                }}
             if(command.getName().equalsIgnoreCase("start")){  //게임시작
                 if(plugin.getCount()>=1) {
-                    a = rd.nextInt(4);
-                    plugin.job[a].setPlayer(plugin.People.get(a));
-                    player.sendMessage(ChatColor.WHITE + "당신의 직업은 " + plugin.job[a].getJob() + ChatColor.WHITE + " 입니다!");
+                    Collections.shuffle(plugin.People);
+                    for(int i=0; i<plugin.People.size(); i++){
+                        plugin.job[i].setPlayer(plugin.People.get(i));
+                        plugin.job[0].setPlayerAdd(plugin.People.get(i));
+                        plugin.People.get(i).sendMessage(ChatColor.WHITE + "당신의 직업은 " + plugin.job[i].getJob() + ChatColor.WHITE + " 입니다!");}
                     for (Player all : plugin.People) { //마피아게임 밤
                         all.sendTitle("마피아 게임", ChatColor.DARK_PURPLE + "밤", 20, 40, 20);
                     }
