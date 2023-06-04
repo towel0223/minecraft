@@ -16,6 +16,11 @@ import java.util.List;
 
 public class Citizen implements Listener, CommandExecutor {
 
+    Citizen(MafiaPlugin plugin) {
+        job = ChatColor.YELLOW + "시민";
+        this.plugin=plugin;
+    }
+
     protected String job;
     Player player;
     List<Player> players = new ArrayList<Player>();
