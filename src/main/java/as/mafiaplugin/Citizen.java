@@ -16,7 +16,9 @@ import java.util.List;
 
 public class Citizen implements Listener, CommandExecutor {
 
-    public Citizen() {
+    Citizen(MafiaPlugin plugin) {
+        job = ChatColor.YELLOW + "시민";
+        this.plugin=plugin;
     }
 
     protected String job;
