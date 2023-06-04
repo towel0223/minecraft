@@ -11,6 +11,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Citizen implements Listener, CommandExecutor {
@@ -20,6 +21,7 @@ public class Citizen implements Listener, CommandExecutor {
     List<Player> players = new ArrayList<Player>();
     boolean mafiaTime=true;
     MafiaPlugin plugin;
+
 
     Citizen(MafiaPlugin plugin) {
         job = ChatColor.YELLOW + "시민";
@@ -43,13 +45,14 @@ public class Citizen implements Listener, CommandExecutor {
     public Player getPlayer(String name)
     {
         for(Player all: players){
-            if(all.getName().equalsIgnoreCase(name))
+            if(all.getName().equals(name))
             {
                 return all;
             }
         }
         return null;
     }
+
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {

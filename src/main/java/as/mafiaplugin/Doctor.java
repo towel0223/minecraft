@@ -7,6 +7,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 public class Doctor extends Citizen {
     Doctor(MafiaPlugin plugin){
@@ -20,7 +22,7 @@ public class Doctor extends Citizen {
                 String playerName = strings[0];
 
                 // 플레이어 객체 가져오기
-                Player player = Bukkit.getPlayer(playerName);
+                Player player = plugin.getPlayer(playerName);
 
                 // 플레이어가 존재하고 온라인인 경우
                 if (player != null && player.isOnline()) {

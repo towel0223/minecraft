@@ -42,17 +42,16 @@ public class Mafia extends Citizen {
         }
     }
 
-    @EventHandler
-    public void MafiaMove(PlayerMoveEvent e) {
-        e.setCancelled(true);
-        player.sendMessage(i);
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                 e.setCancelled(false);
-            }
-        }.runTaskLater(plugin, 200L);
-    }
+//    @EventHandler
+//    public void MafiaMove(PlayerMoveEvent e) {
+//        e.setCancelled(true);
+//        new BukkitRunnable() {
+//            @Override
+//            public void run() {
+//                 e.setCancelled(false);
+//            }
+//        }.runTaskLater(plugin, 200L);
+//    }
 
 
 }
