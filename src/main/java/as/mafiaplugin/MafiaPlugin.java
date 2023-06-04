@@ -24,9 +24,9 @@ public final class MafiaPlugin extends JavaPlugin {
     @Override
     public void onEnable() {
         job=new Citizen[4];
-        job[0]=new Doctor(this);
+        job[0]=new Mafia(this);
         job[1]=new Police(this);
-        job[2]=new Mafia(this);
+        job[2]=new Doctor(this);
         job[3]=new Citizen(this);
         getServer().getPluginManager().registerEvents(job[0],this);
         getServer().getPluginManager().registerEvents(job[1],this);
