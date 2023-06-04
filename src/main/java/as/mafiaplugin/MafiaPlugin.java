@@ -35,9 +35,10 @@ public final class MafiaPlugin extends JavaPlugin {
         ParkExecutor=new Park(this);
         getCommand("ready").setExecutor(ParkExecutor);
         getCommand("start").setExecutor(ParkExecutor);
-         }
 
-        @Override
+    }
+
+    @Override
     public void onDisable() {
         // Plugin shutdown logic
     }
