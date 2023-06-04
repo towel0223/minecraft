@@ -24,11 +24,15 @@ public class Citizen implements Listener, CommandExecutor {
     protected String job;
     Player player;
     List<Player> players = new ArrayList<Player>();
-
-    boolean mafiaTime = true;
-
     boolean mafiaTime = true;
     MafiaPlugin plugin;
+    private int jobNumber; // 직업 번호 저장 변수
+  
+    Citizen(MafiaPlugin plugin)
+    {
+        this.plugin=plugin;
+        job=ChatColor.WHITE+"시민";
+    }
 
     public void onEnable() {
         // 플러그인 활성화 시 실행되는 코드
@@ -36,9 +40,10 @@ public class Citizen implements Listener, CommandExecutor {
         votingEnabled = false;
         votes = new HashMap<>();
     }
-    Citizen(MafiaPlugin plugin) {
-        job = ChatColor.YELLOW + "시민";
-        this.plugin = plugin;
+
+
+    public int getJobNumber() {
+        return jobNumber;
     }
 
     public void setPlayer(Player player) {
@@ -49,22 +54,13 @@ public class Citizen implements Listener, CommandExecutor {
         return job;
     }
 
-    public void setPlayerAdd(Player player) {
-        players.add(player);
-    }
 
     public Player getPlayer() {
         return player;
     }
 
-    public Player getPlayer(String name) {
-        for (Player all : players) {
-            if (all.getName().equals(name)) {
-                return all;
-            }
-        }
-        return null;
-    }
+
+
 
 
     @Override

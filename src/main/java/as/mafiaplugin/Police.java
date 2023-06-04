@@ -6,15 +6,22 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
 public class Police extends Citizen {
-    private boolean isSearchEnabled = true; // 사용 횟수 변수
+    //private boolean isSearchEnabled = true; // 사용 횟수 변수
     private Park park; // Park 클래스의 인스턴스 변수
+    private Citizen playerJob;
+
     public Police(MafiaPlugin plugin) {
         super(plugin);
         super.job = ChatColor.BLUE + "경찰";
+    }
+
+    public void setPark(Park park) {
         this.park = park; // Park 클래스의 인스턴스를 전달받음
     }
-    public void setPark(Park park) {
-        this.park = park;
+
+    public void setPlayerJob(Player player, Citizen job) {
+        playerJob = job;
+        // 필요에 따라 플레이어에게 알림을 보내거나 추가적인 동작을 수행할 수 있습니다.
     }
 
     @Override
@@ -46,33 +53,41 @@ public class Police extends Citizen {
             } else {
                 player.sendMessage(ChatColor.WHITE + targetPlayer.getName() + "님은 마피아가 아닙니다.");
             }
-
             return true;
         }
 
         return false;
     }
 
-    private boolean isMafia(Player player) {
-        // 플레이어의 직업을 가져온다.
-        String job = getJobOfPlayer(player);
-
-        // 직업이 마피아인지 확인한다.
-        if (job.contains("마피아") && job != null) {
-            return true; // 마피아인 경우 true 반환
-        } else {
-            return false; // 마피아가 아닌 경우 false 반환
-        }
-    }
-
-    private String getJobOfPlayer(Player player) {
-        // 플레이어의 직업을 확인하여 반환하는 로직을 구현합니다.
-        String targetPlayerName = player.getName();
-        for (int i = 0; i < plugin.job.length; i++) {
-            if (park.plugin.job[i].getPlayer(targetPlayerName) == player) {
-                return park.plugin.job[i].getJob();
+    private int getPlayerIndex(Player player) {
+        if (park != null && park.plugin != null && park.plugin.People != null) {
+            // 플레이어의 인덱스 번호를 가져옵니다.
+            for (int i = 0; i < park.plugin.People.size(); i++) {
+                if (park.plugin.People.get(i) == player) {
+                    return i;
+                }
             }
         }
-        return null; // 직업을 찾지 못한 경우 null을 반환합니다.
+        return -1; // 인덱스 번호를 찾지 못한 경우 -1을 반환합니다.
     }
+
+
+    private boolean isMafia(Player player) {
+        // 플레이어의 인덱스 번호를 가져옵니다.
+        int playerIndex = getPlayerIndex(player);
+
+        // 플레이어의 직업을 확인합니다.
+        if (playerIndex != -1 && park != null && park.plugin != null && park.plugin.job != null && park.plugin.job[playerIndex] != null) {
+            int jobNumber = park.plugin.job[playerIndex].getJobNumber();
+
+            // 직업 번호가 2, 4, 8인 경우에만 마피아로 간주합니다.
+            if (jobNumber == 2 || jobNumber == 4 || jobNumber == 8) {
+                return true; // 마피아인 경우 true 반환
+            }
+        }
+
+        return false; // 마피아가 아닌 경우 false 반환
+    }
+
 }
+//ver0.8
