@@ -12,12 +12,15 @@ import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.boss.BossBar;
 import org.bukkit.boss.BarColor;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 
 public class Park implements CommandExecutor {
     BossBar bossBar=Bukkit.createBossBar("남은 시간",BarColor.BLUE, BarStyle.SOLID); //남은시간
     final MafiaPlugin plugin;
+    private List<Player> players = new ArrayList<>();
     private final Police police;
     private Park park;
 
@@ -25,6 +28,21 @@ public class Park implements CommandExecutor {
         this.plugin = plugin;
         this.police = new Police(plugin); // 수정
         this.police.setPark(this); //추가함
+    }
+    public List<Player> getPlayers() {
+        return players;
+    }
+    public boolean isMafia(Player player) {
+        for (int i = 0; i < players.size(); i++) {
+            if (players.get(i).equals(player)) {
+                if (plugin.job[i] instanceof Mafia) {
+                    // plugin.job[i]는 Mafia 클래스의 인스턴스입니다.
+                    return true; // 해당 플레이어의 직업이 마피아인 경우 true 반환
+                }
+            }
+        }
+        // plugin.job[i]는 Mafia 클래스의 인스턴스가 아닙니다.
+        return false; // 해당 플레이어의 직업이 마피아가 아닌 경우 false 반환
     }
 
 
@@ -60,6 +78,7 @@ public class Park implements CommandExecutor {
             if(command.getName().equalsIgnoreCase("start")){  //게임시작
                 if(plugin.getCount()>=1) {
                     Collections.shuffle(plugin.People);
+                    players = plugin.People; // players 필드에 플레이어 목록 저장
                     for (int i = 0; i < plugin.People.size(); i++) {
                         plugin.job[i].setPlayer(plugin.People.get(i));
                         plugin.People.get(i).sendMessage(ChatColor.WHITE + "당신의 직업은 " + plugin.job[i].getJob() + ChatColor.WHITE + " 입니다!");
@@ -67,18 +86,11 @@ public class Park implements CommandExecutor {
 
 
                     police.setPark(this);  // Police 클래스에 현재 Park 인스턴스를 전달[수정한 부분]
-                    for (int i = 0; i < plugin.People.size(); i++) { //여기 수정했습니다.
-                        Player targetPlayer = plugin.People.get(i);
-                        String playerName = targetPlayer.getName();
-                        for (int j = 0; j < plugin.job.length; j++) {
-                            if (plugin.job[j].getPlayer().getName().equals(playerName)) {
-                                police.setPlayerJob(targetPlayer, plugin.job[j]);
-                                break;
-                            }
-                        }
-                    }
+
 
                     plugin.getCommand("search").setExecutor(new Police(plugin));
+                    plugin.job[0].MafiaTeleport(plugin.job[0].getPlayer());
+
                     plugin.getCommand("protect").setExecutor(new Doctor(plugin));
                     plugin.job[0].MafiaTeleport(plugin.job[0].getPlayer());
                     for (Player all : plugin.People) { //마피아게임 밤
