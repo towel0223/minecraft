@@ -27,8 +27,7 @@ public class Citizen implements Listener, CommandExecutor {
     boolean mafiaTime = true;
     MafiaPlugin plugin;
     private int jobNumber; // 직업 번호 저장 변수
-    MafiaPlugin plugin;
-  
+
     Citizen(MafiaPlugin plugin)
     {
         this.plugin=plugin;
@@ -64,10 +63,7 @@ public class Citizen implements Listener, CommandExecutor {
 
 
 
-    @Override
-    public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
-        return false;
-    }
+
 
 
     public class mafiaTime {
@@ -119,31 +115,30 @@ public class Citizen implements Listener, CommandExecutor {
                     Collections.shuffle(plugin.People);
                     for (int i = 0; i < plugin.People.size(); i++) {
                         plugin.job[i].setPlayer(plugin.People.get(i));
-                        plugin.job[0].setPlayerAdd(plugin.People.get(i));
                         plugin.People.get(i).sendMessage(ChatColor.WHITE + "당신의 직업은 " + plugin.job[i].getJob() + ChatColor.WHITE + " 입니다!");
                     }
 
                     for (Player all : plugin.People) { // 마피아게임 밤
                         all.sendTitle("마피아 게임", ChatColor.DARK_RED + "밤", 20, 40, 20);
-                        //밤 로직 추가
+                        // 시민(시민과 같은 편) 플레이어들을 랜덤한 장소로 텔레포트
+                        List<Location> citizenLocations = new ArrayList<>();
+                        // 시민 플레이어를 텔레포트할 여러 장소의 좌표를 설정
+                        citizenLocations.add(new Location(player.getWorld(), 1, 1, 1));
+                        citizenLocations.add(new Location(player.getWorld(), 2, 2, 2));
+                        citizenLocations.add(new Location(player.getWorld(), 3, 3, 3));
+                        citizenLocations.add(new Location(player.getWorld(), 3, 3, 3));
+                        citizenLocations.add(new Location(player.getWorld(), 3, 3, 3));
+                        citizenLocations.add(new Location(player.getWorld(), 3, 3, 3));
+                        citizenLocations.add(new Location(player.getWorld(), 3, 3, 3));
+                        citizenLocations.add(new Location(player.getWorld(), 3, 3, 3));
+                        citizenLocations.add(new Location(player.getWorld(), 3, 3, 3));
+                        citizenLocations.add(new Location(player.getWorld(), 3, 3, 3));
+                        citizenLocations.add(new Location(player.getWorld(), 3, 3, 3));
+                        // ... 다른 장소들 추가    //밤 로직 추가
                     }
 
 
-                    // 시민(시민과 같은 편) 플레이어들을 랜덤한 장소로 텔레포트
-                    List<Location> citizenLocations = new ArrayList<>();
-                    // 시민 플레이어를 텔레포트할 여러 장소의 좌표를 설정
-                    citizenLocations.add(new Location(player.getWorld(), 1, 1, 1));
-                    citizenLocations.add(new Location(player.getWorld(), 2, 2, 2));
-                    citizenLocations.add(new Location(player.getWorld(), 3, 3, 3));
-                    citizenLocations.add(new Location(player.getWorld(), 3, 3, 3));
-                    citizenLocations.add(new Location(player.getWorld(), 3, 3, 3));
-                    citizenLocations.add(new Location(player.getWorld(), 3, 3, 3));
-                    citizenLocations.add(new Location(player.getWorld(), 3, 3, 3));
-                    citizenLocations.add(new Location(player.getWorld(), 3, 3, 3));
-                    citizenLocations.add(new Location(player.getWorld(), 3, 3, 3));
-                    citizenLocations.add(new Location(player.getWorld(), 3, 3, 3));
-                    citizenLocations.add(new Location(player.getWorld(), 3, 3, 3));
-                    // ... 다른 장소들 추가
+
 
                     for (Player citizenPlayer : plugin.getPlayersByJob("시민")) {
                         // 랜덤한 장소 선택
@@ -214,7 +209,7 @@ public class Citizen implements Listener, CommandExecutor {
         votingEnabled = true;
         votes.clear();
         Bukkit.broadcastMessage(ChatColor.YELLOW + "투표가 시작되었습니다. 최후의 변론 후 살릴지 죽일지를 찬반투표로 결정합니다.");
-        Bukkit.getScheduler().runTaskLater(this, () -> endVoting(), 100 * 20L); // 100초 후 투표 종료
+        Bukkit.getScheduler().runTaskLater(plugin, () -> endVoting(), 100 * 20L); // 100초 후 투표 종료
     }
 
     public void endVoting() {
@@ -248,6 +243,6 @@ public class Citizen implements Listener, CommandExecutor {
         }
     }
 
-    public void MafiaTeleport(Player player) {
+    public void MafiaTeleport(Player p){};
+
     }
-}

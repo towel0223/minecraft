@@ -2,6 +2,7 @@ package as.mafiaplugin;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -10,7 +11,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.boss.BossBar;
 import org.bukkit.boss.BarColor;
+
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 
 public class Park implements CommandExecutor {
@@ -18,6 +22,7 @@ public class Park implements CommandExecutor {
     final MafiaPlugin plugin;
     private final Police police;
     private Park park;
+
 
     public Park(MafiaPlugin plugin) {
         this.plugin = plugin;
@@ -61,32 +66,8 @@ public class Park implements CommandExecutor {
 
                     for (int i = 0; i < plugin.People.size(); i++) {
                         plugin.job[i].setPlayer(plugin.People.get(i));
-                        plugin.job[0].setPlayerAdd(plugin.People.get(i));
 
                         plugin.People.get(i).sendMessage(ChatColor.WHITE + "당신의 직업은 " + plugin.job[i].getJob() + ChatColor.WHITE + " 입니다!");
-                    }
-
-
-                    for (Player all : plugin.People) { //마피아게임 밤
-                        all.sendTitle("마피아 게임", ChatColor.DARK_RED + "밤", 20, 40, 20);
-                    }
-
-                    for (Player all : plugin.People) { //마피아게임 낮
-                        all.sendTitle("마피아 게임", ChatColor.YELLOW + "낮", 20, 40, 20);
-                    }
-
-
-                    for (Player all : plugin.People) { //마피아게임 낮
-                        all.sendTitle("마피아 게임", ChatColor.YELLOW + "낮", 20, 40, 20);
-                    }
-
-
-                    plugin.People.get(i).sendMessage(ChatColor.WHITE + "당신의 직업은 " + plugin.job[i].getJob() + ChatColor.WHITE + " 입니다!");
-
-                    for (int i = 0; i < plugin.People.size(); i++) {
-                        plugin.job[i].setPlayer(plugin.People.get(i));
-                        plugin.People.get(i).sendMessage(ChatColor.WHITE + "당신의 직업은 " + plugin.job[i].getJob() + ChatColor.WHITE + " 입니다!");
-
                     }
 
 
@@ -104,47 +85,69 @@ public class Park implements CommandExecutor {
 
                     plugin.getCommand("search").setExecutor(new Police(plugin));
                     plugin.getCommand("protect").setExecutor(new Doctor(plugin));
-                    plugin.job[0].MafiaTeleport(plugin.job[0].getPlayer());
+                    plugin.job[2].MafiaTeleport(plugin.job[2].getPlayer());
                     for (Player all : plugin.People) { //마피아게임 밤
                         all.sendTitle("마피아 게임", ChatColor.DARK_PURPLE + "밤", 20, 40, 20);
                     }
+                    for (Player player3 : plugin.People) {
+                        bossBar.addPlayer(player3); //각자 플레이어에게 보스바 부여
+                    }
+                    new BukkitRunnable() {
+                        @Override
+                        public void run() {
+                            double progress = bossBar.getProgress(); //시간 가져오기
+                            bossBar.setProgress(progress - 0.01f);  //남은시간(-1초씩 빼기 총 100초)
+                            if (Math.abs(bossBar.getProgress()) < 0.02f) { //0초되면 보스바가 사라짐
+                                bossBar.removeAll();
+                                cancel();
+                            }
+                        }
+                    }.runTaskTimerAsynchronously(plugin, 0, 20);
+                    new BukkitRunnable() {
+                        @Override
+                        public void run() {
+                            plugin.mafiaRun = false;
+                        }
+                    }.runTaskLaterAsynchronously(plugin, 200);
+                    // 시민(시민과 같은 편) 플레이어들을 랜덤한 장소로 텔레포트
+                    List<Location> citizenLocations = new ArrayList<>();
+                    // 시민 플레이어를 텔레포트할 여러 장소의 좌표를 설정
+                    citizenLocations.add(new Location(player.getWorld(), 91, 60, 409));
+                    citizenLocations.add(new Location(player.getWorld(), 91, 60, 346));
+                    citizenLocations.add(new Location(player.getWorld(), 91, 68, 409));
+                    citizenLocations.add(new Location(player.getWorld(), 91, 68, 346));
+                    citizenLocations.add(new Location(player.getWorld(), 91, 73, 409));
+                    citizenLocations.add(new Location(player.getWorld(), 91, 73, 346));
+                    citizenLocations.add(new Location(player.getWorld(), 91, 78, 409));
+                    citizenLocations.add(new Location(player.getWorld(), 91, 78, 346));
+                    citizenLocations.add(new Location(player.getWorld(), 91, 83, 409));
+                    citizenLocations.add(new Location(player.getWorld(), 91, 83, 346));
+                    // ... 다른 장소들 추가    //밤 로직 추가
+                    Collections.shuffle(citizenLocations);
+                    for(int i=0; i<plugin.job.length; i++)
+                    {
+                        if(plugin.job[i].getJob)
+                    }
+
 
                     for (Player all : plugin.People) { //마피아게임 낮
 
                         all.sendTitle("마피아 게임", ChatColor.YELLOW + "낮", 20, 40, 20);
                     }
 
-                    for (Player player3 : plugin.People) {
-                        bossBar.addPlayer(player3); //각자 플레이어에게 보스바 부여
-                    }
-                    new BukkitRunnable(){
-                        @Override
-                        public void run(){
-                        double progress = bossBar.getProgress(); //시간 가져오기
-                        bossBar.setProgress(progress - 0.01f);  //남은시간(-1초씩 빼기 총 100초)
-                        if (Math.abs(bossBar.getProgress()) < 0.02f) { //0초되면 보스바가 사라짐
-                            bossBar.removeAll();
-                            cancel();
-                        }}
-                    }.runTaskTimerAsynchronously(plugin,0,20);
 
-                    new BukkitRunnable(){
-                        @Override
-                        public void run(){
-                                plugin.mafiaRun=false;
-                        }
-                    }.runTaskLaterAsynchronously(plugin,200);
+
+
+
 
                 }
                 return true;
-            }
-            else{
-                player.sendMessage(ChatColor.RED+"플레이어수가 부족해 게임을 시작할 수 없습니다.");
+            } else {
+                player.sendMessage(ChatColor.RED + "플레이어수가 부족해 게임을 시작할 수 없습니다.");
                 return true;
             }
         }
 
-
-                
+return false;
     }
 }

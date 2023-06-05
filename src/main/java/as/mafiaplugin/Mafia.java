@@ -17,15 +17,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Mafia extends Citizen {
+    Location mafiaLocation;
     Mafia(MafiaPlugin plugin) {
 
         super(plugin);
         super.job = ChatColor.BLACK + "마피아";
     }
-
-    Location mafiaLocation;
-
-
     //mafiaTime T:밤 F:낮
     @EventHandler
     public void mafiaTeleport(PlayerTeleportEvent e) {
@@ -37,7 +34,6 @@ public class Mafia extends Citizen {
             player.removePotionEffect(PotionEffectType.INVISIBILITY); // INVISIBILITY 효과 제거
         }
     }
-
     @Override
     public void MafiaTeleport(Player p) {
         if (mafiaTime) {

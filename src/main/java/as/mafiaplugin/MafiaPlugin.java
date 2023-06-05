@@ -26,8 +26,8 @@ public final class MafiaPlugin extends JavaPlugin {
         job=new Citizen[4];
         job[0]=new Doctor(this);
         job[1]=new Police(this);
-        job[2]=new Mafia(this);
-        job[3]=new Citizen(this);
+        job[2]=new Citizen(this);
+        job[3]=new Mafia(this);
         getServer().getPluginManager().registerEvents(job[0],this);
         getServer().getPluginManager().registerEvents(job[1],this);
         getServer().getPluginManager().registerEvents(job[2],this);
