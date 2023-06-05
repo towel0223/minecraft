@@ -1,13 +1,14 @@
 package as.mafiaplugin;
 
 import org.bukkit.ChatColor;
-import org.bukkit.entity.Player;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+
+import java.util.List;
 
 public class Police extends Citizen {
-    //private boolean isSearchEnabled = true; // 사용 횟수 변수
-    private Park park; // Park 클래스의 인스턴스 변수
+    private Park park;
     private Citizen playerJob;
 
     public Police(MafiaPlugin plugin) {
@@ -16,12 +17,11 @@ public class Police extends Citizen {
     }
 
     public void setPark(Park park) {
-        this.park = park; // Park 클래스의 인스턴스를 전달받음
+        this.park = park;
     }
 
     public void setPlayerJob(Player player, Citizen job) {
         playerJob = job;
-        // 필요에 따라 플레이어에게 알림을 보내거나 추가적인 동작을 수행할 수 있습니다.
     }
 
     @Override
@@ -31,63 +31,29 @@ public class Police extends Citizen {
                 sender.sendMessage(ChatColor.RED + "플레이어만 이 명령어를 사용할 수 있습니다.");
                 return true;
             }
-
-            Player player = (Player) sender;
-
-            if (args.length < 1) {
-                player.sendMessage(ChatColor.RED + "플레이어 이름을 입력해주세요.");
+            if (!(playerJob instanceof Police)) {
+                sender.sendMessage(ChatColor.RED + "경찰만 이 명령어를 사용할 수 있습니다.");
                 return true;
             }
 
-            String targetPlayerName = args[0];
-            Player targetPlayer = plugin.getPlayer(targetPlayerName);
-
-            if (targetPlayer == null) {
-                player.sendMessage(ChatColor.RED + "해당 플레이어를 찾을 수 없습니다.");
-                return true;
-            }
-
-            // 해당 플레이어의 역할 확인 및 알려주기
-            if (isMafia(targetPlayer)) {
-                player.sendMessage(ChatColor.WHITE + targetPlayer.getName() + "님은 마피아입니다.");
-            } else {
-                player.sendMessage(ChatColor.WHITE + targetPlayer.getName() + "님은 마피아가 아닙니다.");
-            }
-            return true;
-        }
-
-        return false;
-    }
-
-    private int getPlayerIndex(Player player) {
-        if (park != null && park.plugin != null && park.plugin.People != null) {
-            // 플레이어의 인덱스 번호를 가져옵니다.
-            for (int i = 0; i < park.plugin.People.size(); i++) {
-                if (park.plugin.People.get(i) == player) {
-                    return i;
+            if (park != null) {
+                List<Player> players = park.getPlayers(); // Park 클래스의 플레이어 목록을 가져옴
+                for (Player target : players) {
+                    if (target.getName().equals(args[0])) {
+                        if (park.isMafia(target)) {
+                            player.sendMessage(ChatColor.YELLOW + "조사한 플레이어 " + target.getName() + "은(는) 마피아입니다.");
+                        } else {
+                            player.sendMessage(ChatColor.GREEN + "조사한 플레이어 " + target.getName() + "은(는) 마피아가 아닙니다.");
+                        }
+                        return true;
+                    }
                 }
-            }
-        }
-        return -1; // 인덱스 번호를 찾지 못한 경우 -1을 반환합니다.
-    }
-
-
-    private boolean isMafia(Player player) {
-        // 플레이어의 인덱스 번호를 가져옵니다.
-        int playerIndex = getPlayerIndex(player);
-
-        // 플레이어의 직업을 확인합니다.
-        if (playerIndex != -1 && park != null && park.plugin != null && park.plugin.job != null && park.plugin.job[playerIndex] != null) {
-            int jobNumber = park.plugin.job[playerIndex].getJobNumber();
-
-            // 직업 번호가 2, 4, 8인 경우에만 마피아로 간주합니다.
-            if (jobNumber == 2 || jobNumber == 4 || jobNumber == 8) {
-                return true; // 마피아인 경우 true 반환
+                player.sendMessage(ChatColor.RED + "해당 플레이어를 찾을 수 없습니다.");
+            } else {
+                player.sendMessage(ChatColor.RED + "경찰이 파크를 설정하지 않았습니다.");
             }
         }
 
-        return false; // 마피아가 아닌 경우 false 반환
+        return true;
     }
-
 }
-//ver0.8

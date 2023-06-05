@@ -19,6 +19,7 @@ import static org.bukkit.Bukkit.getServer;
 
 public class Citizen implements Listener, CommandExecutor {
 
+
     private boolean votingEnabled;
     private HashMap<Player, Integer> votes;
     protected String job;
@@ -245,4 +246,4 @@ public class Citizen implements Listener, CommandExecutor {
 
     public void MafiaTeleport(Player p){};
 
-    }
+}
