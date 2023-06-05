@@ -20,6 +20,15 @@ public class Doctor extends Citizen {
                 if (strings.length == 1) {
                     String playerName = strings[0];
 
+                    if (getJob().equals(ChatColor.GRAY + "의사")) {
+                        player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 99999, 5, false, false));
+                        commandSender.sendMessage(ChatColor.GREEN + player.getName() + "님을 치료합니다.");
+                        return true;
+                    } else {
+                        commandSender.sendMessage(ChatColor.RED + "당신은 의사가 아닙니다.");
+                        return true;
+                    }
+
                     // 플레이어 객체 가져오기
                     Player player = getPlayer(playerName);
                     // 플레이어가 존재하고 온라인인 경우
@@ -39,7 +48,6 @@ public class Doctor extends Citizen {
                 }
             }
         }
-
         return false;
     }
 }
